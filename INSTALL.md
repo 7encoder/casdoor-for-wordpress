@@ -26,8 +26,10 @@ Before you begin, ensure you have:
 
 1. **Download the Plugin**
    ```bash
-   # Clone or download from GitHub
+   # Clone from GitHub
    git clone https://github.com/7encoder/casdoor-for-wordpress.git
+   # Or download the latest release from:
+   # https://github.com/7encoder/casdoor-for-wordpress/releases
    ```
 
 2. **Upload to WordPress**
@@ -40,8 +42,11 @@ Before you begin, ensure you have:
    - Find "Casdoor WordPress Plugin"
    - Click "Activate"
 
-### Option 2: Via Composer
+### Option 2: Via Composer (Future)
 
+> **Note**: Composer package publication is planned for a future release.
+
+Once available on Packagist:
 ```bash
 cd /path/to/wordpress/wp-content/plugins/
 composer require casdoor/wordpress-casdoor-plugin

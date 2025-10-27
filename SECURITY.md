@@ -64,9 +64,17 @@ We take security vulnerabilities seriously. If you discover a security issue, pl
 
 ### DO
 
-1. **Email Security Team**
+1. **Report via GitHub Security Advisories**
+   - Go to: https://github.com/7encoder/casdoor-for-wordpress/security/advisories
+   - Click "Report a vulnerability"
+   - Fill in the details (private disclosure)
+   
+   OR
+   
+2. **Email Security Team**
    - Send details to: security@casdoor.org
    - Include "SECURITY: Casdoor WordPress Plugin" in subject
+   - Note: GitHub Security Advisories is the preferred method
 
 2. **Provide Details**
    ```
