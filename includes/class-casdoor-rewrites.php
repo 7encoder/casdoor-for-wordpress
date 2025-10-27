@@ -314,7 +314,7 @@ class Casdoor_Rewrites {
 
         $link_html = '<div id="custom-create-account-before-contact-fields" style="text-align: right; margin: 0 0 10px;">';
         $link_html .= esc_html($manage_text) . ' ';
-        $link_html .= '<a href="' . esc_url($signup_url) . '">' . esc_html($create_account_text) . '</a>';
+        $link_html .= '<a href="' . esc_url($signup_url) . '" target="_blank">' . esc_html($create_account_text) . '</a>';
         $link_html .= '</div>';
 
         $js_link_html = wp_json_encode($link_html);
