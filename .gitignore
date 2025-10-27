@@ -1,0 +1,36 @@
+# WordPress files
+wp-content/*
+!wp-content/mu-plugins/
+!wp-content/plugins/
+!wp-content/themes/
+wp-content/plugins/hello.php
+wp-content/themes/twenty*/
+
+# Node dependencies
+node_modules/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Composer dependencies
+vendor/
+composer.lock
+
+# PHPUnit test artifacts
+.phpunit.result.cache
+coverage/
+coverage.xml
+phpunit.xml.dist
+
+# Build artifacts
+dist/
+build/
+*.zip
