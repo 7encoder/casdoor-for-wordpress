@@ -60,57 +60,19 @@ class Casdoor_Admin {
             <p>
                 <?php
                 printf(
-                    /* translators: %s: Casdoor URL */
-                    esc_html__('This plugin provides Single Sign-On authentication using %s.', 'casdoor-wordpress-plugin'),
-                    '<a href="https://casdoor.org/" target="_blank" rel="noopener noreferrer">Casdoor</a>'
+                    /* translators: %1$s: First callback URL, %2$s: Second callback URL */
+                    esc_html__('Add the following two callback URLs to your Casdoor application: %1$s and %2$s', 'casdoor-wordpress-plugin'),
+                    '<code>' . esc_html(site_url('?auth=casdoor')) . '</code>',
+                    '<code>' . esc_html(site_url('/')) . '</code>'
                 );
                 ?>
             </p>
             
-            <p>
+            <form method="post" action="options.php">
                 <?php
-                printf(
-                    /* translators: %s: Callback URL */
-                    esc_html__('When activated, this plugin will redirect all login requests to your Casdoor instance. To add a custom login link, use: %s', 'casdoor-wordpress-plugin'),
-                    '<code>' . esc_html(site_url('?auth=casdoor')) . '</code>'
-                );
+                settings_fields('casdoor_options_group');
                 ?>
-            </p>
-            
-            <div id="accordion">
-                <h3><?php esc_html_e('Step 1: Setup Casdoor', 'casdoor-wordpress-plugin'); ?></h3>
-                <div>
-                    <h4><?php esc_html_e('Setting up Casdoor', 'casdoor-wordpress-plugin'); ?></h4>
-                    <ol>
-                        <li>
-                            <?php
-                            printf(
-                                /* translators: %s: GitHub URL */
-                                esc_html__('Install and run Casdoor (see %s)', 'casdoor-wordpress-plugin'),
-                                '<a href="https://github.com/casdoor/casdoor" target="_blank" rel="noopener noreferrer">GitHub</a>'
-                            );
-                            ?>
-                        </li>
-                        <li>
-                            <?php
-                            printf(
-                                /* translators: %s: Callback URL */
-                                esc_html__('Create a new application and add this callback URL: %s', 'casdoor-wordpress-plugin'),
-                                '<strong><code>' . esc_html(site_url('?auth=casdoor')) . '</code></strong>'
-                            );
-                            ?>
-                        </li>
-                        <li><?php esc_html_e('Copy the Client ID and Client Secret to the configuration below.', 'casdoor-wordpress-plugin'); ?></li>
-                    </ol>
-                </div>
-
-                <h3 id="sso-configuration"><?php esc_html_e('Step 2: Configuration', 'casdoor-wordpress-plugin'); ?></h3>
-                <div>
-                    <form method="post" action="options.php">
-                        <?php
-                        settings_fields('casdoor_options_group');
-                        ?>
-                        <table class="form-table" role="presentation">
+                <table class="form-table" role="presentation">
                             <tbody>
                                 <tr>
                                     <th scope="row">
@@ -291,8 +253,6 @@ class Casdoor_Admin {
 
                         <?php submit_button(); ?>
                     </form>
-                </div>
-            </div>
         </div>
         <?php
     }
