@@ -310,9 +310,9 @@ class Casdoor_Rewrites {
 
         $signup_url = $backend . '/signup/' . urlencode($application);
         $create_account_text = __('Create an Account', 'casdoor-wordpress-plugin');
-        $manage_text = __('Manage your donations,', 'casdoor-wordpress-plugin');
+        $manage_text = __('Manage your transactions,', 'casdoor-wordpress-plugin');
 
-        $link_html = '<div id="custom-create-account-before-contact-fields" style="text-align: right; margin: 0 0 10px;">';
+        $link_html = '<div id="custom-create-account-before-contact-fields" style="font-weight: bold; text-align: right; margin: 0 0 10px;">';
         $link_html .= esc_html($manage_text) . ' ';
         $link_html .= '<a href="' . esc_url($signup_url) . '" target="_blank">' . esc_html($create_account_text) . '</a>';
         $link_html .= '</div>';
