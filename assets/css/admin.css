@@ -1,0 +1,113 @@
+/**
+ * Casdoor Admin Styles
+ */
+
+.clear {
+    clear: both;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+.code {
+    background: #efefef;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    color: #d63638;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+table.form-table td input[type="text"],
+table.form-table td input[type="url"],
+table.form-table td input[type="password"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+.seperator {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    padding-bottom: 15px;
+}
+
+#accordion {
+    margin-top: 20px;
+}
+
+#accordion h3 {
+    cursor: pointer;
+    padding: 1em;
+    margin: 2px 0 0 0;
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+#accordion h3:hover {
+    background: #005a87;
+}
+
+#accordion .ui-accordion-content {
+    color: #262626;
+    line-height: 1.6;
+    padding: 1.5em;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+#accordion h4 {
+    margin-top: 0;
+    color: #0073aa;
+}
+
+#accordion ol {
+    line-height: 1.8;
+}
+
+#accordion ol li {
+    margin-bottom: 8px;
+}
+
+.alertbar {
+    background-color: #dc3232;
+    color: #ffffff;
+    display: block;
+    line-height: 45px;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    z-index: 100;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 20px;
+}
+
+.alertbar a {
+    color: white;
+    text-decoration: underline;
+}
+
+.alertbar a:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+
+/* WordPress admin style consistency */
+.wrap p.description {
+    color: #646970;
+    font-size: 13px;
+}
+
+.wrap code {
+    padding: 3px 6px;
+    background: #f0f0f1;
+    border-radius: 3px;
+}
