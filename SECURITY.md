@@ -68,37 +68,11 @@ We take security vulnerabilities seriously. If you discover a security issue, pl
    - Go to: https://github.com/7encoder/casdoor-for-wordpress/security/advisories
    - Click "Report a vulnerability"
    - Fill in the details (private disclosure)
-   
-   OR
-   
-2. **Email Security Team**
-   - Send details to: security@casdoor.org
-   - Include "SECURITY: Casdoor WordPress Plugin" in subject
-   - Note: GitHub Security Advisories is the preferred method
 
-2. **Provide Details**
-   ```
-   - Description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Affected versions
-   - Suggested fix (if any)
-   ```
-
-3. **Wait for Response**
+2. **Wait for Response**
    - We aim to respond within 48 hours
    - We'll work with you on a fix
    - We'll coordinate disclosure timeline
-
-### What to Expect
-
-- **Acknowledgment**: Within 48 hours
-- **Assessment**: Within 1 week
-- **Fix Timeline**: Varies by severity
-  - Critical: 1-7 days
-  - High: 1-2 weeks
-  - Medium: 2-4 weeks
-  - Low: Next release
 
 ### Disclosure Process
 
@@ -257,13 +231,6 @@ Recommended security plugins:
 ## License
 
 Security policies are part of the Apache 2.0 license.
-
-## Contact
-
-For security inquiries:
-- Email: security@casdoor.org
-- PGP Key: Available on request
-- Response Time: 48 hours
 
 ---
 
