@@ -60,239 +60,199 @@ class Casdoor_Admin {
             <p>
                 <?php
                 printf(
-                    /* translators: %s: Casdoor URL */
-                    esc_html__('This plugin provides Single Sign-On authentication using %s.', 'casdoor-wordpress-plugin'),
-                    '<a href="https://casdoor.org/" target="_blank" rel="noopener noreferrer">Casdoor</a>'
+                    /* translators: %1$s: First callback URL, %2$s: Second callback URL */
+                    esc_html__('Add the following two callback URLs to your Casdoor application: %1$s and %2$s', 'casdoor-wordpress-plugin'),
+                    '<code>' . esc_html(site_url('?auth=casdoor')) . '</code>',
+                    '<code>' . esc_html(site_url('/')) . '</code>'
                 );
                 ?>
             </p>
             
-            <p>
+            <form method="post" action="options.php">
                 <?php
-                printf(
-                    /* translators: %s: Callback URL */
-                    esc_html__('When activated, this plugin will redirect all login requests to your Casdoor instance. To add a custom login link, use: %s', 'casdoor-wordpress-plugin'),
-                    '<code>' . esc_html(site_url('?auth=casdoor')) . '</code>'
-                );
+                settings_fields('casdoor_options_group');
                 ?>
-            </p>
-            
-            <div id="accordion">
-                <h3><?php esc_html_e('Step 1: Setup Casdoor', 'casdoor-wordpress-plugin'); ?></h3>
-                <div>
-                    <h4><?php esc_html_e('Setting up Casdoor', 'casdoor-wordpress-plugin'); ?></h4>
-                    <ol>
-                        <li>
-                            <?php
-                            printf(
-                                /* translators: %s: GitHub URL */
-                                esc_html__('Install and run Casdoor (see %s)', 'casdoor-wordpress-plugin'),
-                                '<a href="https://github.com/casdoor/casdoor" target="_blank" rel="noopener noreferrer">GitHub</a>'
-                            );
-                            ?>
-                        </li>
-                        <li>
-                            <?php
-                            printf(
-                                /* translators: %s: Callback URL */
-                                esc_html__('Create a new application and add this callback URL: %s', 'casdoor-wordpress-plugin'),
-                                '<strong><code>' . esc_html(site_url('?auth=casdoor')) . '</code></strong>'
-                            );
-                            ?>
-                        </li>
-                        <li><?php esc_html_e('Copy the Client ID and Client Secret to the configuration below.', 'casdoor-wordpress-plugin'); ?></li>
-                    </ol>
-                </div>
+                <table class="form-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_active">
+                                    <?php esc_html_e('Activate Casdoor', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" 
+                                       id="casdoor_active"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[active]" 
+                                       value="1" 
+                                       <?php checked(absint(casdoor_get_option('active')), 1); ?> />
+                                <p class="description">
+                                    <?php esc_html_e('Enable Casdoor SSO authentication', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                <h3 id="sso-configuration"><?php esc_html_e('Step 2: Configuration', 'casdoor-wordpress-plugin'); ?></h3>
-                <div>
-                    <form method="post" action="options.php">
-                        <?php
-                        settings_fields('casdoor_options_group');
-                        ?>
-                        <table class="form-table" role="presentation">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_active">
-                                            <?php esc_html_e('Activate Casdoor', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="checkbox" 
-                                               id="casdoor_active"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[active]" 
-                                               value="1" 
-                                               <?php checked(absint(casdoor_get_option('active')), 1); ?> />
-                                        <p class="description">
-                                            <?php esc_html_e('Enable Casdoor SSO authentication', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_client_id">
+                                    <?php esc_html_e('Client ID', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="text" 
+                                       id="casdoor_client_id"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[client_id]" 
+                                       value="<?php echo esc_attr(casdoor_get_option('client_id')); ?>" 
+                                       class="regular-text" />
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_client_id">
-                                            <?php esc_html_e('Client ID', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="text" 
-                                               id="casdoor_client_id"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[client_id]" 
-                                               value="<?php echo esc_attr(casdoor_get_option('client_id')); ?>" 
-                                               class="regular-text" />
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_client_secret">
+                                    <?php esc_html_e('Client Secret', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="password" 
+                                       id="casdoor_client_secret"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[client_secret]" 
+                                       value="<?php echo esc_attr(casdoor_get_option('client_secret')); ?>" 
+                                       class="regular-text" />
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_client_secret">
-                                            <?php esc_html_e('Client Secret', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="password" 
-                                               id="casdoor_client_secret"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[client_secret]" 
-                                               value="<?php echo esc_attr(casdoor_get_option('client_secret')); ?>" 
-                                               class="regular-text" />
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_backend">
+                                    <?php esc_html_e('Backend URL', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="url" 
+                                       id="casdoor_backend"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[backend]" 
+                                       value="<?php echo esc_attr(casdoor_get_option('backend')); ?>" 
+                                       class="regular-text" 
+                                       placeholder="https://your-casdoor-domain.com" />
+                                <p class="description">
+                                    <?php esc_html_e('Example: https://your-casdoor-domain.com', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_backend">
-                                            <?php esc_html_e('Backend URL', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="url" 
-                                               id="casdoor_backend"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[backend]" 
-                                               value="<?php echo esc_attr(casdoor_get_option('backend')); ?>" 
-                                               class="regular-text" 
-                                               placeholder="https://your-casdoor-domain.com" />
-                                        <p class="description">
-                                            <?php esc_html_e('Example: https://your-casdoor-domain.com', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_organization">
+                                    <?php esc_html_e('Organization', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="text" 
+                                       id="casdoor_organization"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[organization]" 
+                                       value="<?php echo esc_attr(casdoor_get_option('organization')); ?>" 
+                                       class="regular-text" />
+                                <p class="description">
+                                    <?php esc_html_e('Default: built-in', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_organization">
-                                            <?php esc_html_e('Organization', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="text" 
-                                               id="casdoor_organization"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[organization]" 
-                                               value="<?php echo esc_attr(casdoor_get_option('organization')); ?>" 
-                                               class="regular-text" />
-                                        <p class="description">
-                                            <?php esc_html_e('Default: built-in', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_application">
+                                    <?php esc_html_e('Application', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="text" 
+                                       id="casdoor_application"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[application]" 
+                                       value="<?php echo esc_attr(casdoor_get_option('application')); ?>" 
+                                       class="regular-text" />
+                                <p class="description">
+                                    <?php esc_html_e('Default: app-built-in', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_application">
-                                            <?php esc_html_e('Application', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="text" 
-                                               id="casdoor_application"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[application]" 
-                                               value="<?php echo esc_attr(casdoor_get_option('application')); ?>" 
-                                               class="regular-text" />
-                                        <p class="description">
-                                            <?php esc_html_e('Default: app-built-in', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_redirect_dashboard">
+                                    <?php esc_html_e('Redirect to Dashboard', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" 
+                                       id="casdoor_redirect_dashboard"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[redirect_to_dashboard]" 
+                                       value="1" 
+                                       <?php checked(absint(casdoor_get_option('redirect_to_dashboard')), 1); ?> />
+                                <p class="description">
+                                    <?php esc_html_e('Redirect users to the dashboard after signing in', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_redirect_dashboard">
-                                            <?php esc_html_e('Redirect to Dashboard', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="checkbox" 
-                                               id="casdoor_redirect_dashboard"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[redirect_to_dashboard]" 
-                                               value="1" 
-                                               <?php checked(absint(casdoor_get_option('redirect_to_dashboard')), 1); ?> />
-                                        <p class="description">
-                                            <?php esc_html_e('Redirect users to the dashboard after signing in', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_login_only">
+                                    <?php esc_html_e('Login Only Mode', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" 
+                                       id="casdoor_login_only"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[login_only]" 
+                                       value="1" 
+                                       <?php checked(absint(casdoor_get_option('login_only')), 1); ?> />
+                                <p class="description">
+                                    <?php esc_html_e('Restrict to existing WordPress users only (no automatic user creation)', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_login_only">
-                                            <?php esc_html_e('Login Only Mode', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="checkbox" 
-                                               id="casdoor_login_only"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[login_only]" 
-                                               value="1" 
-                                               <?php checked(absint(casdoor_get_option('login_only')), 1); ?> />
-                                        <p class="description">
-                                            <?php esc_html_e('Restrict to existing WordPress users only (no automatic user creation)', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_auto_sso">
+                                    <?php esc_html_e('Auto SSO', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" 
+                                       id="casdoor_auto_sso"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[auto_sso]" 
+                                       value="1" 
+                                       <?php checked(absint(casdoor_get_option('auto_sso')), 1); ?> />
+                                <p class="description">
+                                    <?php esc_html_e('Automatically redirect non-logged-in users to Casdoor', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_auto_sso">
-                                            <?php esc_html_e('Auto SSO', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="checkbox" 
-                                               id="casdoor_auto_sso"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[auto_sso]" 
-                                               value="1" 
-                                               <?php checked(absint(casdoor_get_option('auto_sso')), 1); ?> />
-                                        <p class="description">
-                                            <?php esc_html_e('Automatically redirect non-logged-in users to Casdoor', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="casdoor_woo_redirect">
+                                    <?php esc_html_e('WooCommerce Integration', 'casdoor-wordpress-plugin'); ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" 
+                                       id="casdoor_woo_redirect"
+                                       name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[woo_edit_account_redirect]" 
+                                       value="1" 
+                                       <?php checked(absint(casdoor_get_option('woo_edit_account_redirect')), 1); ?> />
+                                <p class="description">
+                                    <?php esc_html_e('Redirect WooCommerce /my-account/edit-account/ to Casdoor and show signup links on checkout', 'casdoor-wordpress-plugin'); ?>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                                <tr>
-                                    <th scope="row">
-                                        <label for="casdoor_woo_redirect">
-                                            <?php esc_html_e('WooCommerce Integration', 'casdoor-wordpress-plugin'); ?>
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <input type="checkbox" 
-                                               id="casdoor_woo_redirect"
-                                               name="<?php echo esc_attr(self::OPTIONS_NAME); ?>[woo_edit_account_redirect]" 
-                                               value="1" 
-                                               <?php checked(absint(casdoor_get_option('woo_edit_account_redirect')), 1); ?> />
-                                        <p class="description">
-                                            <?php esc_html_e('Redirect WooCommerce /my-account/edit-account/ to Casdoor and show signup links on checkout', 'casdoor-wordpress-plugin'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <?php submit_button(); ?>
-                    </form>
-                </div>
-            </div>
+                <?php submit_button(); ?>
+            </form>
         </div>
         <?php
     }

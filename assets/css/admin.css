@@ -27,51 +27,19 @@ table.form-table td input[type="password"] {
     max-width: 400px;
 }
 
+.form-table td {
+    display: flex;
+    margin-bottom: 0;
+    align-items: center;
+}
+
+.form-table td p {
+    margin-top: 0;
+}
+
 .seperator {
     border-bottom: solid 1px rgba(0, 0, 0, 0.1);
     padding-bottom: 15px;
-}
-
-#accordion {
-    margin-top: 20px;
-}
-
-#accordion h3 {
-    cursor: pointer;
-    padding: 1em;
-    margin: 2px 0 0 0;
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-#accordion h3:hover {
-    background: #005a87;
-}
-
-#accordion .ui-accordion-content {
-    color: #262626;
-    line-height: 1.6;
-    padding: 1.5em;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-top: none;
-}
-
-#accordion h4 {
-    margin-top: 0;
-    color: #0073aa;
-}
-
-#accordion ol {
-    line-height: 1.8;
-}
-
-#accordion ol li {
-    margin-bottom: 8px;
 }
 
 .alertbar {
