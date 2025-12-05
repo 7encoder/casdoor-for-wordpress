@@ -355,7 +355,10 @@ class Casdoor_Rewrites {
      * @return array Modified allowed hosts
      */
     public function add_allowed_redirect_hosts($hosts) {
-        if (!$this->is_woocommerce_feature_enabled()) {
+        // Always add Casdoor backend to allowed hosts when plugin is active
+        // This is needed for login redirects to work, not just for WooCommerce features
+        $activated = absint(casdoor_get_option('active'));
+        if (!$activated) {
             return $hosts;
         }
 
