@@ -14,7 +14,7 @@ A modern, secure WordPress plugin for Single Sign-On (SSO) authentication using 
 - 🎨 **Modern WordPress Standards** - Follows WordPress Coding Standards and Plugin Handbook guidelines
 - 🔄 **RP-Initiated Logout** - Proper single sign-out from both WordPress and Casdoor
 - 🌐 **PHP 8.3 Compatible** - Works with PHP 7.4 through PHP 8.3
-- ⚡ **Auto SSO** - Optional automatic redirect for unauthenticated users
+- ⚡ **Auto SSO** - Optional automatic redirect to require authentication for all site visitors
 - 🎯 **Flexible User Management** - Login-only mode or automatic user creation
 - 🔌 **Shortcode Support** - Easy SSO button integration with `[casdoor_sso_button]`
 
@@ -67,7 +67,7 @@ composer require casdoor/wordpress-casdoor-plugin
 3. Optional settings:
    - **Redirect to Dashboard**: Redirect users to admin dashboard after login
    - **Login Only Mode**: Restrict login to existing WordPress users only
-   - **Auto SSO**: Automatically redirect unauthenticated users to Casdoor
+   - **Auto SSO**: When enabled, any visitor who is not logged in will be automatically redirected to Casdoor to authenticate. This effectively makes your entire WordPress site require authentication—visitors must log in before they can access any page.
    - **WooCommerce Integration**: Enable WooCommerce-specific features
 
 ## Usage

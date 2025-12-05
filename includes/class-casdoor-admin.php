@@ -226,7 +226,7 @@ class Casdoor_Admin {
                                        value="1" 
                                        <?php checked(absint(casdoor_get_option('auto_sso')), 1); ?> />
                                 <p class="description">
-                                    <?php esc_html_e('Automatically redirect non-logged-in users to Casdoor', 'casdoor-wordpress-plugin'); ?>
+                                    <?php esc_html_e('When enabled, any visitor who is not logged in will be automatically redirected to Casdoor to authenticate. This effectively requires all users to log in before accessing any page on your site.', 'casdoor-wordpress-plugin'); ?>
                                 </p>
                             </td>
                         </tr>
